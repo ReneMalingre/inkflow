@@ -46,7 +46,8 @@ module.exports = () => {
         inject: true,
         name: 'Ink Flow - Another Text Editor',
         short_name: 'Ink Flow',
-        description: "This application installs 'Ink Flow', a Text Editor.",
+        description:
+          "This application installs 'Ink Flow', Another Text Editor.",
         id: '/',
         background_color: '#225ca3',
         theme_color: '#31A9E1',
@@ -55,7 +56,7 @@ module.exports = () => {
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
-            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            sizes: [48, 96, 128, 192, 256, 384, 512], // multiple sizes
             destination: path.join('assets', 'icons'),
           },
         ],
