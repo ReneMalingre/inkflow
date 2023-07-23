@@ -3,6 +3,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 const path = require('path')
 const { InjectManifest } = require('workbox-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 // The `webpack.config.js` is exporting a function that returns the configuration object.
 module.exports = () => {
@@ -46,7 +47,8 @@ module.exports = () => {
         name: 'Ink Flow - Another Text Editor',
         short_name: 'Ink Flow',
         description: "This application installs 'Ink Flow', a Text Editor.",
-        background_color: '#272822',
+        id: '/',
+        background_color: '#225ca3',
         theme_color: '#31A9E1',
         start_url: '/',
         publicPath: '/',
@@ -57,6 +59,9 @@ module.exports = () => {
             destination: path.join('assets', 'icons'),
           },
         ],
+      }),
+      new CopyWebpackPlugin({
+        patterns: [{ from: 'src/images', to: 'images' }],
       }),
     ],
 
