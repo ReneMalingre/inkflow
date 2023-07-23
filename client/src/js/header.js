@@ -1,5 +1,4 @@
-const header = 
-`/*
+const header = `/*
     ____      __         
    /  _/___  / /__       
    / // __ \/ //_/       
