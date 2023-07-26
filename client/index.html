@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ink Flow</title>
+    <title>InkFlow</title>
 
     <link
       rel="stylesheet"
@@ -42,11 +42,13 @@
   <body>
     <nav id="navbar">
       <div class="nav-btn">
-        <a class="btn btn-sm btn-dark" id="buttonInstall" role="button"
-          >Install!</a
+        <!-- set the install button to be invisible by default -->
+        <a class="btn btn-sm btn-light" id="buttonInstall" role="button" disabled style="display: none;"
+          >Install Me!</a
         >
+        <p class="app-status" id="installStatus">InkFlow is installed</p>
       </div>
-      <h1>Ink Flow - Another Text Editor</h1>
+      <h1>InkFlow - Another Text Editor</h1>
 
       <div class="navbar-brand">
         <img src="./assets/icons/icon_48x48.png" height="48" width="48" />

@@ -1,4 +1,4 @@
-# Ink Flow - Another Text Editor
+# InkFlow - Another Text Editor
 
  [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -81,7 +81,7 @@ Screen when installed on device:
 
 ## Live Application
 
-The application is deployed on Heroku [Ink Flow](https://hidden-cove-03428-aa99c97b4203.herokuapp.com/).
+The application is deployed on Heroku [InkFlow](https://hidden-cove-03428-aa99c97b4203.herokuapp.com/).
 
 ## Credits
 

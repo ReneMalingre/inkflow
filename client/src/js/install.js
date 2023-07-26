@@ -1,28 +1,36 @@
 const butInstall = document.getElementById('buttonInstall')
-
+const appInstallStatus = document.getElementById('installStatus')
 // Logic for installing the PWA
 // Add an event handler to the `beforeinstallprompt` event
 window.addEventListener('beforeinstallprompt', (event) => {
+  // the browser fires this event when it knows the user can install the PWA
+
   // here we prevent the default behavior of the event (older browsers)
   event.preventDefault()
 
-  // console.log('👍', 'beforeinstallprompt', event)
   // Stash the event to globals so it can be triggered later.
   window.deferredPrompt = event
 
   // Update UI that notifies the user they can install the app
-  butInstall.style.visibility = 'visible'
+  // ie show the install button
+  appInstallStatus.textContent = ''
+  appInstallStatus.style.display = 'none'
+  butInstall.classList.remove('btn-light')
+  butInstall.classList.add('btn-dark')
+  butInstall.textContent = 'Install Me!'
+  butInstall.style.display = 'block'
+  butInstall.disabled = false
 })
 
 // Implement a click event handler on the `butInstall` element
 butInstall.addEventListener('click', async () => {
-  // console.log('👍', 'butInstall-clicked');
+  butInstall.disabled = true // avoid multiple calls
 
   // Check if 'beforeinstallprompt' event was fired
   const promptEvent = window.deferredPrompt
   if (!promptEvent) {
     // The deferred prompt isn't available.
-    // console.log('👎', 'butInstall-clicked but no prompt');
+    butInstall.disabled = false
     return
   }
 
@@ -31,46 +39,49 @@ butInstall.addEventListener('click', async () => {
   promptEvent.prompt()
 
   // Wait for the user to respond to the prompt
-  const choiceResult = await promptEvent.userChoice
-  console.log('👍', 'userChoice', choiceResult)
+  await promptEvent.userChoice
 
   // Clear the saved prompt since it can't be used again
   window.deferredPrompt = null
-
-  // Hide the install button
-  butInstall.style.display = 'none'
-
-  // Update the UI
-  butInstall.setAttribute('disabled', true)
-  butInstall.textContent = 'Installed!'
 })
 
-// Add an handler for the `appinstalled` event
+// Update 'appinstalled' event
 window.addEventListener('appinstalled', (event) => {
   // Clear the deferredPrompt
   window.deferredPrompt = null
   // Update the UI
-  butInstall.setAttribute('disabled', true)
-  butInstall.textContent = 'Installed!'
+  // Disable the install button, change its color and text
+  butInstall.disabled = true
+  butInstall.classList.add('btn-light')
+  butInstall.classList.remove('btn-dark')
+  butInstall.textContent = 'Inkflow is Installed!'
+  butInstall.style.display = 'none'
+  appInstallStatus.textContent = 'Inkflow is installed'
+  appInstallStatus.style.display = 'block'
 })
 
 // Function to check if the display mode is standalone
 function isRunningStandalone() {
   return (
     window.matchMedia('(display-mode: standalone)').matches ||
-    window.navigator.standalone ||
-    document.referrer.includes('android-app://')
+    window.navigator.standalone
   )
 }
 
 // wait until DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   // Check if the app is running standalone
+  // (ie is installed and running from the start menu)
   if (isRunningStandalone()) {
     // If it is, hide the install button
+    butInstall.disabled = true
+    butInstall.classList.add('btn-light')
+    butInstall.classList.remove('btn-dark')
+    butInstall.textContent = 'Installed!'
     butInstall.style.display = 'none'
-  } else {
-    // If it's not, show the install button
-    butInstall.style.display = 'block'
+    appInstallStatus.textContent = 'Inkflow is Installed'
+    appInstallStatus.style.display = 'none'
   }
+  // if not, beforeinstallprompt event will handle the install button
+  // and the default is to hide the install button
 })

@@ -28,7 +28,7 @@ module.exports = () => {
       // HtmlWebpackPlugin simplifies creation of HTML files to serve the webpack bundles.
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'Ink Flow',
+        title: 'InkFlow',
       }),
 
       // MiniCssExtractPlugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS.
@@ -44,10 +44,10 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'Ink Flow - Another Text Editor',
-        short_name: 'Ink Flow',
+        name: 'InkFlow - Another Text Editor',
+        short_name: 'InkFlow',
         description:
-          "This application installs 'Ink Flow', Another Text Editor.",
+          "This application installs 'InkFlow', Another Text Editor.",
         id: '/',
         background_color: '#225ca3',
         theme_color: '#31A9E1',
